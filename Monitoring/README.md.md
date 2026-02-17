@@ -180,7 +180,7 @@ sudo apt install nginx unzip php-fpm php-mysql php-curl php-gd php-mbstring php-
 cd /tmp && \
 wget -O teemip.zip https://sourceforge.net/projects/teemip/files/latest/download && \
 sudo mkdir -p /var/www/html/teemip && \
-sudo unzip teemip.zip -d /var/www/teemip && \
+sudo unzip teemip.zip -d /var/www/html/teemip && \
 rm teemip.zip
 ```
 
