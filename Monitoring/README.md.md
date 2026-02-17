@@ -6,11 +6,8 @@
 > Please take into consideration that Debian does not come by default with the "sudo" package in the following setup you should install that for optimized install time and make sure that the user executing the commands are part of the sudo group. Run the following commands with root privilages.
 
 ```bash
-su -c "apt update && apt upgrade && apt install sudo && /usr/sbin/usermod -aG sudo $USER"
+su -c "apt update && apt upgrade && apt install sudo && /usr/sbin/usermod -aG sudo $USER" && newgrp sudo
 ```
-
-> [!CAUTION]
-> Changes won't take effect unless you log out of the user or run the following command manually `newgrp sudo` 
 
 ## NGINX
 
@@ -49,9 +46,9 @@ sudo apt install nginx -y
 
 ### Test
 
-> To see if NGINX install was successfully. Replace server_ip with your server's address.
+> To see if NGINX install was successfully. Replace {server_ip} with your server's address.
 ```
-curl http://<<server_ip>>/
+curl http://{server_ip}/
 ```
 > This should output the following:
 ```html
@@ -99,7 +96,7 @@ sudo rm /etc/nginx/sites-enabled/default
 
 > Install the required packages
 ```bash
-sudo apt install php-fpm php-cli php-xml php-mbstring php-gd php-curl php-intl php-zip -y
+sudo apt install php-fpm php-cli php-xml php-mbstring php-gd php-curl php-intl php-zip -y && \
 cd /tmp && \
 wget -q https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz && \
 sudo mkdir -p /var/www/html/dokuwiki && \
@@ -125,8 +122,8 @@ sudo chown -R www-data:www-data /var/www/html/dokuwiki
 ```bash
 sudo tee /etc/nginx/sites-available/dokuwiki > /dev/null <<'EOF'
 server {
-    listen <<listen_port>>;
-    server_name <<server_name>>;
+    listen {listen_port};
+    server_name {server_name};
     root /var/www/html/dokuwiki;
     index index.php index.html;
     client_max_body_size 8M;
@@ -178,12 +175,12 @@ rm /var/www/html/dokuwiki/install.php
 
 > Install the required packages
 ```bash
-sudo apt update && upgarde && \ 
+sudo apt update && \
 sudo apt install nginx unzip php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-zip php-soap php-apcu php-ldap graphviz -y && \
 cd /tmp && \
 wget -O teemip.zip https://sourceforge.net/projects/teemip/files/latest/download && \
 sudo mkdir -p /var/www/html/teemip && \
-unzip teemip.zip -d /var/www/teemip && \
+sudo unzip teemip.zip -d /var/www/teemip && \
 rm teemip.zip
 ```
 
@@ -203,8 +200,8 @@ sudo chown -R www-data:www-data /var/www/html/teemip
 ```bash
 sudo tee /etc/nginx/sites-available/teemip > /dev/null <<'EOF'
 server {
-    listen 5000;
-    server_name 100.75.246.40;
+    listen {listen_port];
+    server_name {server_address};
     root /var/www/html/teemip/web;
     index index.php index.html;
     client_max_body_size 8M;
@@ -284,7 +281,7 @@ sudo systemctl reload nginx
 
 > Install the required packages
 ```bash
-sudo apt install mariadb-server mariadb-client && \
+sudo apt install mariadb-server mariadb-client
 ```
 
 > Start the installation
@@ -324,7 +321,7 @@ sudo mysql -u root -p
 ```
 
 > Now you are logged in the MariaDB CLI to create a database.
-> Replace {db_name} of your choice
+> Replace {db_name} of your choice. To exit type `EXIT`
 ```SQL
 CREATE DATABASE {db_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
