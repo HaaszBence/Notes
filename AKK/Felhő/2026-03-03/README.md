@@ -1,4 +1,11 @@
-### Donwloading the .ova
+### Contents
+---
+
+* [Downloading the .ova](#downloading-the-ova)
+* [Setting up the .ova](#setting-up-the-ova)
+* [Using PNETLab](#using-pnetlab)
+### Downloading the .ova
+---
 
 > To download the `.ova` go to the moodle page and find the following listed under the docker section
 
@@ -31,6 +38,7 @@
 > After this you can start up the machine
 
 ### Using PNETLab
+---
 
 > To reach the `PNETLab` open a browser and in the search bar type [http://localhost](http://localhost)
 > You will see the following
